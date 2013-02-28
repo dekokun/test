@@ -1,6 +1,6 @@
 <?php
 
-class DemoTest extends PHPUnit_Framework_TestCase{
+class PhpDemoTest extends PHPUnit_Framework_TestCase{
   protected $demo;
 
   protected function setUp() {
@@ -9,5 +9,11 @@ class DemoTest extends PHPUnit_Framework_TestCase{
 
   public function test_demo1() {
     $this->assertEquals(1, 1);
+  }
+
+  public function test_demo2() {
+    $result = $this->demo->plus(1, 2);
+    $expect = 3;
+    $this->assertEquals($result, $expect);
   }
 }
