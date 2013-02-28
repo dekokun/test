@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name= "BuildTest" basedir= "." default= "main">
 
-    <target name="main" depends= "init"></target>
+  <property name="outputDir" value="./reports"/>
+  <target name="main" depends= "phpunit"></target>
 
-    <target name="init" >
-        <delete dir= "./reports" includeemptydirs= "true" />
-        <mkdir dir= "./reports" />
-    </target>
+  <target name="init" >
+    <delete dir= "./reports" includeemptydirs= "true" />
+    <mkdir dir= "./reports" />
+  </target>
+
+  <target name="phpunit" depends= "init">
+    <phpunit bootstrap="./vendor/autoload.php">
+    <formatter type="xml" outfile="${outputDir}/phpunit.xml"/>
+    <batchtest>
+      <fileset dir="./autoTest/">
+        <include name="**/*Test.php"/>
+      </fileset>
+    </batchtest>
+  </phpunit>
+ </target>
+
 </project>

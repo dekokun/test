@@ -1,3 +1,6 @@
 {
-    "require": {"phing/phing": "*"}
+    "require": {
+      "phing/phing": "*",
+      "phpunit/phpunit": "3.7.*"
+    }
 }
