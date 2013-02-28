@@ -10,7 +10,7 @@
   </target>
 
   <target name="phpunit" depends= "init">
-    <phpunit bootstrap="./vendor/autoload.php" codecoverage="true">
+    <phpunit bootstrap="./vendor/autoload.php">
     <formatter type="xml" outfile="${outputDir}/phpunit.xml"/>
     <batchtest>
       <fileset dir="./autoTest/">
