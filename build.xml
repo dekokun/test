@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name= "BuildTest" basedir= "." default= "main">
+
+    <target name="main" depends= "init"></target>
+
+    <target name="init" >
+        <delete dir= "./reports" includeemptydirs= "true" />
+        <mkdir dir= "./reports" />
+    </target>
+</project>
