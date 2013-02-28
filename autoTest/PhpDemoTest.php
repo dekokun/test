@@ -7,11 +7,11 @@ class PhpDemoTest extends PHPUnit_Framework_TestCase{
     $this->demo = new PhpDemo();
   }
 
-  public function test_demo1() {
+  public function test_standard_test() {
     $this->assertEquals(1, 1);
   }
 
-  public function test_demo2() {
+  public function test_plus() {
     $result = $this->demo->plus(1, 2);
     $expect = 3;
     $this->assertEquals($result, $expect);
