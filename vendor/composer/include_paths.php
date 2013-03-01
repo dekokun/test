@@ -15,4 +15,6 @@ return array(
     $vendorDir . '/phpunit/php-code-coverage/',
     $vendorDir . '/phpunit/phpunit/',
     $vendorDir . '/phpunit/phpunit/../../symfony/yaml',
+    $vendorDir . '/phpmd/phpmd/../../pdepend/pdepend/src/main/php',
+    $vendorDir . '/phpmd/phpmd/src/main/php',
 );

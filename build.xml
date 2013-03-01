@@ -2,7 +2,7 @@
 <project name= "BuildTest" basedir= "." default= "main">
 
   <property name="outputDir" value="./reports"/>
-  <target name="main" depends= "phpunit"></target>
+  <target name="main" depends= "phpunit, phppmd"></target>
 
   <target name="init" >
     <delete dir= "./reports" includeemptydirs= "true" />
@@ -19,5 +19,16 @@
     </batchtest>
   </phpunit>
  </target>
+
+  <target name="phppmd" depends= "init" description="">
+    <phpmd>
+      <fileset dir=".">
+        <exclude name="vendor/**" />
+        <include name="**/*.php" />
+        <include name="*.php" />
+      </fileset>
+      <formatter type="xml" outfile="${outputDir}/pmd.xml"/>
+    </phpmd>
+  </target>
 
 </project>
