@@ -2,11 +2,13 @@
 <project name= "BuildTest" basedir= "." default= "main">
 
   <property name="outputDir" value="./reports"/>
-  <target name="main" depends= "phpunit, phppmd"></target>
+  <property name="composerDir" value="./vendor"/>
+  <property name="composerBinDir" value="${composerDir}/bin/"/>
+  <target name="main" depends= "phpunit, phppmd, phpcs"></target>
 
   <target name="init" >
-    <delete dir= "./reports" includeemptydirs= "true" />
-    <mkdir dir= "./reports" />
+    <delete dir= "${outputDir}" includeemptydirs= "true" />
+    <mkdir dir= "${outputDir}" />
   </target>
 
   <target name="phpunit" depends= "init">
@@ -14,6 +16,7 @@
     <formatter type="xml" outfile="${outputDir}/phpunit.xml"/>
     <batchtest>
       <fileset dir="./autoTest/">
+        <exclude name="${composerDir}/**" />
         <include name="**/*Test.php"/>
       </fileset>
     </batchtest>
@@ -23,7 +26,7 @@
   <target name="phppmd" depends= "init" description="">
     <phpmd>
       <fileset dir=".">
-        <exclude name="vendor/**" />
+        <exclude name="vendor/**/*" />
         <include name="**/*.php" />
         <include name="*.php" />
       </fileset>
@@ -31,4 +34,19 @@
     </phpmd>
   </target>
 
+  <target name="phpcodesniffer" depends= "init" description="">
+    <phpcodesniffer>
+      <fileset dir=".">
+        <exclude name="${composerDir}/**/*" />
+        <include name="**/*.php" />
+        <include name="*.php" />
+      </fileset>
+      <formatter type="xml" outfile="${outputDir}/codesniffer.xml"/>
+    </phpcodesniffer>
+  </target>
+
+  <target name="phpcs" description="">
+    <exec command="${composerBinDir}/phpcs --report-xml=${outputDir}/codesniffer.xml --ignore=${composerDir} ." escape="false">
+    </exec>
+  </target>
 </project>
