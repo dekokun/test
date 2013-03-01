@@ -46,7 +46,7 @@
   </target>
 
   <target name="phpcs" description="">
-    <exec command="${composerBinDir}/phpcs --report-xml=${outputDir}/codesniffer.xml --ignore=${composerDir} ." escape="false">
+    <exec command="${composerBinDir}/phpcs --report-checkstyle=${outputDir}/codesniffer.xml --ignore=${composerDir} ." escape="false">
     </exec>
   </target>
 </project>
