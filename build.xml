@@ -43,7 +43,7 @@
   </target>
 
   <target name="phpcs" depends= "init" description="">
-    <exec command="${composerBinDir}/phpcs --report-checkstyle=${outputDir}/codesniffer.xml --ignore=${composerDir} ${project.basedir}" escape="false">
+    <exec command="${composerBinDir}/phpcs --standard=Generic --report-checkstyle=${outputDir}/codesniffer.xml --ignore=${composerDir} ${project.basedir}" escape="false">
     </exec>
   </target>
 </project>
