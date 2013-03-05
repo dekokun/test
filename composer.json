@@ -1,0 +1,11 @@
+{
+    "autoload": {
+      "psr-0": {"": "lib"}
+    },
+    "require": {
+      "phpmd/phpmd" : "1.4.*",
+      "phing/phing": "*",
+      "phpunit/phpunit": "3.7.*",
+      "squizlabs/php_codesniffer": "*"
+    }
+}

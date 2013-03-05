@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name= "BuildTest" basedir= "." default= "main">
+
+  <target name="main" depends= "phpunit, phpcs, phppmd"></target>
+  <property name="outputDir" value="reports"/>
+  <property name="composerDir" value="vendor"/>
+  <property name="composerBinDir" value="${composerDir}/bin/"/>
+
+  <target name="init" >
+    <delete dir= "${outputDir}" includeemptydirs= "true" />
+    <mkdir dir= "${outputDir}" />
+
+    <fileset id="ourPHPFiles" dir=".">
+      <exclude name="${composerDir}/**/*" />
+      <include name="**/*.php" />
+      <include name="*.php" />
+    </fileset>
+  </target>
+
+  <target name="phpunit" depends= "init">
+    <phpunit bootstrap="${composerDir}/autoload.php">
+    <formatter type="xml" outfile="${outputDir}/phpunit.xml"/>
+    <batchtest>
+      <fileset dir="${project.basedir}/autoTest/">
+        <include name="**/*Test.php"/>
+      </fileset>
+    </batchtest>
+  </phpunit>
+ </target>
+
+  <target name="phppmd" depends= "init" description="">
+    <phpmd>
+      <fileset refid="ourPHPFiles" />
+      <formatter type="xml" outfile="${outputDir}/pmd.xml"/>
+    </phpmd>
+  </target>
+
+  <target name="phpcodesniffer" depends= "init" description="">
+    <phpcodesniffer>
+      <fileset  refid="ourPHPFiles" />
+      <formatter type="xml" outfile="${outputDir}/codesniffer.xml"/>
+    </phpcodesniffer>
+  </target>
+
+  <target name="phpcs" depends= "init" description="">
+    <exec command="${composerBinDir}/phpcs --standard=Generic --report-checkstyle=${outputDir}/codesniffer.xml --ignore=${composerDir} ${project.basedir}" escape="false">
+    </exec>
+  </target>
+</project>
